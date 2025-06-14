@@ -1,31 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100">
-  <defs>
-    <!-- Scanline pattern -->
-    <pattern id="scanlines" patternUnits="userSpaceOnUse" width="4" height="4">
-      <rect width="4" height="2" fill="rgba(0,0,0,0.1)" />
-    </pattern>
-
-    <!-- Glow effect -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-
-  <!-- Base red pill with scanlines -->
-  <rect rx="50" ry="50" width="400" height="100" fill="#ff1a1a"/>
-  <rect rx="50" ry="50" width="400" height="100" fill="url(#scanlines)" />
-
-  <!-- Outer glow ring -->
-  <rect rx="50" ry="50" width="400" height="100" fill="none" stroke="#880000" stroke-width="4"/>
-
-  <!-- Cyberpunk glowing text -->
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="100">
+  <rect rx="50" ry="50" width="360" height="100" fill="#ff1a1a" />
   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
-        fill="#ffffff" font-size="34" font-family="Orbitron, 'Segoe UI', sans-serif"
-        font-weight="bold" filter="url(#glow)">
-    VOIDLENS
+        fill="#ffffff" font-size="36" font-family="Orbitron, Segoe UI, sans-serif" font-weight="bold">
+    VoidLens
   </text>
 </svg>
