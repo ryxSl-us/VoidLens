@@ -1,0 +1,19 @@
+{
+  "interval": 600,
+  "targets": [
+    {
+      "id": "box",
+      "name": "box.ryx.us",
+      "url": "https://box.ryx.us",
+      "method": "GET",
+      "timeout": 5000
+    },
+    {
+      "id": "test",
+      "name": "fdsfsdfsd",
+      "url": "http:localhost:5000",
+      "method": "GET",
+      "timeout": 5000
+    }
+  ]
+}
