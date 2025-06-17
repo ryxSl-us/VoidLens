@@ -1,6 +1,7 @@
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { logger } from 'hono/logger';
+import { cors } from 'hono/cors';
 import { createRouter } from './router';
 import { UptimeMonitor } from './monitor';
 import path from 'node:path';
@@ -53,55 +54,47 @@ const welcome = {
                 }
             ]
         },
-
-
     ]
-
 };
-
-
 
 async function main() {
   try {
     log('Voidlens Starting...', 'info')
     const app = new Hono();
     const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
-
     
     const monitor = new UptimeMonitor();
     await monitor.initialize();
     log('Uptime Monitor initialized successfully', 'info');
-
    
+    // Add CORS middleware to allow requests from any origin
+    app.use('*', cors({
+      origin: '*',
+      allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowHeaders: ['Content-Type', 'Authorization'],
+      exposeHeaders: ['Content-Length', 'X-Kuma-Revision'],
+      maxAge: 600,
+      credentials: true,
+    }));
+    
     app.use('*', logger());
-
     
     app.route('/api', createRouter(monitor));
-
    
     app.get('/', (c) => c.json(welcome));
 
     app.get('/health', (c) => c.json({ status: 'ok' }));
-
     
-
     log('Router and Routes created successfully', 'info');
-
-
-
     
     console.log(`Server is starting on port http://localhost:${PORT}`);
     serve({
       fetch: app.fetch,
       port: PORT
     });
-
-    
-   
   } catch (error) {
     console.error('Error initializing uptime monitor:', error);
   }
 }
 
 main();
-
